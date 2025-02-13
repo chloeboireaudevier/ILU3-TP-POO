@@ -30,6 +30,18 @@ public class Sabot implements Iterable<Carte>{
 		
 	}
 	
+	public Carte piocher() {
+		Iterateur i = new Iterateur();
+		//try {
+			Carte c = i.next();
+			i.remove();
+			return c;
+		//}catch(Exception e ) {
+		//	System.out.println("Il y a eu une erreur pendant la pioche");
+		//	return null; //TODO ok ?
+		//}
+	}
+	
 	@Override
 	public Iterator<Carte> iterator(){
 		return new Iterateur();
