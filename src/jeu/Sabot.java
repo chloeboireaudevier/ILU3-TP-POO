@@ -9,7 +9,7 @@ import cartes.Carte;
 public class Sabot implements Iterable<Carte>{
 	private Carte[] cartes;
 	private int nbCartes;
-	private int nbOperations; //Pour l'itérateur
+	private int nbOperations=0; //Pour l'itérateur
 
 	public Sabot(Carte[] cartes) {
 		this.cartes = cartes;
@@ -21,7 +21,7 @@ public class Sabot implements Iterable<Carte>{
 	}
 	
 	public void ajouterCarte(Carte carte) {
-		if (nbCartes>=100) {
+		if (nbCartes>=110) {
 			throw new IllegalStateException(); //TODO bonne méthode ?
 		}else {
 			cartes[nbCartes] = carte;
@@ -31,7 +31,7 @@ public class Sabot implements Iterable<Carte>{
 	}
 	
 	public Carte piocher() {
-		Iterateur i = new Iterateur();
+		Iterator<Carte> i = iterator();
 		//try {
 			Carte c = i.next();
 			i.remove();
@@ -64,7 +64,8 @@ public class Sabot implements Iterable<Carte>{
 				Carte carte = cartes[indiceIterateur];
 				indiceIterateur++;
 				nextEffectue = true;
-				nbOperations = nbOpReference++;
+				nbOperations++;
+				nbOpReference++;
 				return carte;
 			}else {
 				throw new NoSuchElementException();
@@ -78,7 +79,7 @@ public class Sabot implements Iterable<Carte>{
 			if (nbCartes < 1 || !nextEffectue) {
 				throw new IllegalStateException();
 			}else {
-				for (int i = 0;i<nbCartes;i++) {
+				for (int i = 0;i<nbCartes-1;i++) {
 					cartes[i] = cartes[i+1];
 				}
 				nextEffectue = false;
