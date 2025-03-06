@@ -1,7 +1,13 @@
 package cartes;
 
 public abstract class Carte {
-
-	public String toString;
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Carte carte) {
+			return carte.equals(carte); //fonctionne pour limite ?
+		}
+		return false;
+	}
 
 }
