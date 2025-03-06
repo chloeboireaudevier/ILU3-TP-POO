@@ -10,5 +10,7 @@ public class TestJeuDeCartes {
 		
 		
 		jeu.donnerCartes();
+		
+		System.out.println("Test checkCount() : "+jeu.checkCount());
 	}
 }

@@ -4,10 +4,7 @@ public abstract class Carte {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof Carte carte) {
-			return carte.equals(carte); //fonctionne pour limite ?
-		}
-		return false;
+		return obj!= null && this.getClass().equals(obj.getClass());
 	}
 
 }

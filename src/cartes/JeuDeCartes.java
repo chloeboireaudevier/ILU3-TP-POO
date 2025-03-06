@@ -1,5 +1,7 @@
 package cartes;
 
+import java.util.Iterator;
+
 public class JeuDeCartes {
 	private Configuration[] configuration = { new Configuration(new Borne(25), 10),
 			new Configuration(new Borne(50), 10), new Configuration(new Borne(75), 10),
@@ -56,5 +58,40 @@ public class JeuDeCartes {
 			return nbExemplaires;
 		}
 
+	}
+	
+	public boolean checkCount() { //TODO à refaire
+		Carte[] cartes = donnerCartes();
+		
+		boolean conforme = true;
+		
+		Configuration[] configurationTest = new Configuration[configuration.length];
+		
+		int compteur = 1;
+		int indiceConfig = 0;
+		
+		//On compte le nombre de cartes
+		for (int i = 0; i < cartes.length-1; i++) {
+			
+			if ( cartes[i].equals(cartes[i+1])) {
+				
+				compteur++;
+			} else {
+				configurationTest[indiceConfig] = new Configuration(cartes[i],compteur);
+				compteur = 1;
+				indiceConfig++;
+			}
+			
+		}
+		configurationTest[indiceConfig] = new Configuration(cartes[cartes.length-1],compteur);
+		
+		//On verifie
+		for (int i = 0; i < configurationTest.length && conforme; i++) {
+			//System.out.println(configuration[i].getCarte());
+			//System.out.println(configurationTest[i].getCarte());
+			conforme = configurationTest[i]!= null && configurationTest[i].getNbExemplaires() == configuration[i].getNbExemplaires();
+		}
+		
+		return conforme;
 	}
 }
