@@ -2,6 +2,7 @@ package utils;
 import cartes.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -40,12 +41,35 @@ public class GestionCartes  {
 	public static List<Carte> melanger(List<Carte> list) {
 		List<Carte> cartes = new ArrayList<>();
 		
-		for (ListIterator<Carte> listIterator = list.listIterator();listIterator.hasNext()) {
+		for (ListIterator<Carte> listIterator = list.listIterator();listIterator.hasNext();) {
 			cartes.add(listIterator.next());
 			listIterator.remove();			
 		}
 		
 		return cartes;
+		
+	}
+	
+	public boolean verifierMelange(List<Carte> l1, List<Carte> l2) {
+		boolean memeOccurence = true;
+		
+		for (ListIterator<Carte> listIterator = l1.listIterator();listIterator.hasNext() && memeOccurence;) {
+			Carte carte = listIterator.next();
+			if (Collections.frequency(l1,carte) != Collections.frequency(l2, carte)) {
+				memeOccurence = false;
+			}
+		}
+		
+		
+		//Il faut vérifier dans les deux sens
+		for (ListIterator<Carte> listIterator = l2.listIterator();listIterator.hasNext() && memeOccurence;) {
+			Carte carte = listIterator.next();
+			if (Collections.frequency(l1,carte) != Collections.frequency(l2, carte)) {
+				memeOccurence = false;
+			}
+		}
+		
+		return memeOccurence;
 		
 	}
 }
