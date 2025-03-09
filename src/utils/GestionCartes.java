@@ -15,11 +15,7 @@ public class GestionCartes  {
 		int randomNum = rand.nextInt(list.size());
 		
 		E element = list.get(randomNum);
-		
-		for (int i = randomNum; i < list.size()-1; i++) {
-			list.add(i,list.get(i+1));
-		}
-		list.remove(list.size()-1);
+		list.remove(randomNum);
 		
 		return element;
 	}
@@ -41,9 +37,8 @@ public class GestionCartes  {
 	public static <E> List<E> melanger(List<E> list) {
 		List<E> melangee = new ArrayList<>();
 		
-		for (ListIterator<E> listIterator = list.listIterator();listIterator.hasNext();) {
-			melangee.add(listIterator.next());
-			listIterator.remove();			
+		while (!list.isEmpty()) {
+			melangee.add(extraire(list));		
 		}
 		
 		return melangee;
@@ -92,21 +87,22 @@ public class GestionCartes  {
 	
 	public static <E> boolean verifierRassemblement(List<E> list) {
 		boolean rassemble = true;
-		
-		E element = list.get(0);
-		E previousElt;
-		for (ListIterator<E> iterator = list.listIterator(1); iterator.hasNext() && rassemble;) {
-			previousElt = element;
-			element = iterator.next();
-			
-			if ((!element.equals(previousElt))&& iterator.hasNext()) {
-				for (ListIterator<E> iterator2 = list.listIterator(iterator.nextIndex()); iterator2.hasNext() && rassemble;) {
-					E doublon = iterator2.next();
-					if (doublon.equals(previousElt)) {
-						rassemble = false;
+		if (list.size() > 0) {
+			E element = list.get(0);
+			E previousElt;
+			for (ListIterator<E> iterator = list.listIterator(1); iterator.hasNext() && rassemble;) {
+				previousElt = element;
+				element = iterator.next();
+				
+				if ((!element.equals(previousElt))&& iterator.hasNext()) {
+					for (ListIterator<E> iterator2 = list.listIterator(iterator.nextIndex()); iterator2.hasNext() && rassemble;) {
+						E doublon = iterator2.next();
+						if (doublon.equals(previousElt)) {
+							rassemble = false;
+						}
 					}
-				}
-			}					
+				}					
+			}
 		}
 		return rassemble;
 	}
