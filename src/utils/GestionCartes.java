@@ -2,6 +2,7 @@ package utils;
 import cartes.*;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Random;
@@ -36,4 +37,17 @@ public class GestionCartes  {
 		return carte;
 	}
 		
+	public static Carte[] melanger(List<Carte> list) {
+		Carte[] cartes = new Carte[list.size()];
+		
+		ListIterator<Carte> listIterator = list.listIterator();
+		
+		for (int i = 0; i < list.size() && listIterator.hasNext() ; i++) {
+			cartes[i] = listIterator.next();
+			listIterator.remove();			
+		}
+		
+		return cartes;
+		
+	}
 }
