@@ -72,4 +72,25 @@ public class GestionCartes  {
 		return memeOccurence;
 		
 	}
+	
+	public static List<Carte> rassembler(List<Carte> list) {
+		List<Carte> listeOrdonnee = new ArrayList<>();
+		
+		for (ListIterator<Carte> iterator = list.listIterator(); iterator.hasNext();) {
+			//On recupère la carte et on l'ajoute
+			Carte carte = (Carte) iterator.next();
+			listeOrdonnee.add(carte);
+			iterator.remove();
+			
+			//On récupère les autres objets
+			int i = list.indexOf(carte);
+			while (i!=-1) {
+				listeOrdonnee.add(carte);
+				list.remove(i);
+				i = list.indexOf(carte);
+			}
+			
+		}
+		return listeOrdonnee;
+	}
 }
