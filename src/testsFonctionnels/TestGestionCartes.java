@@ -55,8 +55,6 @@ public class TestGestionCartes {
 		System.out.println("Liste melangée avec erreur : "+ GestionCartes.verifierMelange(liste2, liste));
 		
 		
-		
-		
 		//Test sur le jeu de cartes
 		JeuDeCartes jeu = new JeuDeCartes();
 		List<Carte> listeCarteNonMelangee = new LinkedList<>();
