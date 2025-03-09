@@ -37,13 +37,11 @@ public class GestionCartes  {
 		return carte;
 	}
 		
-	public static Carte[] melanger(List<Carte> list) {
-		Carte[] cartes = new Carte[list.size()];
+	public static List<Carte> melanger(List<Carte> list) {
+		List<Carte> cartes = new ArrayList<>();
 		
-		ListIterator<Carte> listIterator = list.listIterator();
-		
-		for (int i = 0; i < list.size() && listIterator.hasNext() ; i++) {
-			cartes[i] = listIterator.next();
+		for (ListIterator<Carte> listIterator = list.listIterator();listIterator.hasNext()) {
+			cartes.add(listIterator.next());
 			listIterator.remove();			
 		}
 		
