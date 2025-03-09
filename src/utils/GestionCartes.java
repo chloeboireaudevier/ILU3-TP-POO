@@ -10,61 +10,61 @@ import java.util.Random;
 
 public class GestionCartes  {
 	
-	public static Carte extraire(List<Carte> cartes) {
+	public static <E> E extraire(List<E> list) {
 		Random rand = new Random();
-		int randomNum = rand.nextInt(cartes.size());
+		int randomNum = rand.nextInt(list.size());
 		
-		Carte carte = cartes.get(randomNum);
+		E element = list.get(randomNum);
 		
-		for (int i = randomNum; i < cartes.size()-1; i++) {
-			cartes.add(i,cartes.get(i+1));
+		for (int i = randomNum; i < list.size()-1; i++) {
+			list.add(i,list.get(i+1));
 		}
-		cartes.remove(cartes.size()-1);
+		list.remove(list.size()-1);
 		
-		return carte;
+		return element;
 	}
 	
-	public static Carte extraireWithIterator(List<Carte> cartes) {
+	public static <E> E extraireWithIterator(List<E> list) {
 		Random rand = new Random();
-		int randomNum = rand.nextInt(cartes.size());
+		int randomNum = rand.nextInt(list.size());
 		
-		ListIterator<Carte> iterator = cartes.listIterator(randomNum);
-		Carte carte = null;
+		ListIterator<E> iterator = list.listIterator(randomNum);
+		E element = null;
 		
 		if (iterator.hasNext()) {
-			carte = iterator.next();
+			element = iterator.next();
 			iterator.remove();
 		}
-		return carte;
+		return element;
 	}
 		
-	public static List<Carte> melanger(List<Carte> list) {
-		List<Carte> cartes = new ArrayList<>();
+	public static <E> List<E> melanger(List<E> list) {
+		List<E> melangee = new ArrayList<>();
 		
-		for (ListIterator<Carte> listIterator = list.listIterator();listIterator.hasNext();) {
-			cartes.add(listIterator.next());
+		for (ListIterator<E> listIterator = list.listIterator();listIterator.hasNext();) {
+			melangee.add(listIterator.next());
 			listIterator.remove();			
 		}
 		
-		return cartes;
+		return melangee;
 		
 	}
 	
-	public boolean verifierMelange(List<Carte> l1, List<Carte> l2) {
+	public static <E> boolean verifierMelange(List<E> l1, List<E> l2) {
 		boolean memeOccurence = true;
 		
-		for (ListIterator<Carte> listIterator = l1.listIterator();listIterator.hasNext() && memeOccurence;) {
-			Carte carte = listIterator.next();
-			if (Collections.frequency(l1,carte) != Collections.frequency(l2, carte)) {
+		for (ListIterator<E> listIterator = l1.listIterator();listIterator.hasNext() && memeOccurence;) {
+			E element = listIterator.next();
+			if (Collections.frequency(l1,element) != Collections.frequency(l2, element)) {
 				memeOccurence = false;
 			}
 		}
 		
 		
 		//Il faut vérifier dans les deux sens
-		for (ListIterator<Carte> listIterator = l2.listIterator();listIterator.hasNext() && memeOccurence;) {
-			Carte carte = listIterator.next();
-			if (Collections.frequency(l1,carte) != Collections.frequency(l2, carte)) {
+		for (ListIterator<E> listIterator = l2.listIterator();listIterator.hasNext() && memeOccurence;) {
+			E element = listIterator.next();
+			if (Collections.frequency(l1,element) != Collections.frequency(l2, element)) {
 				memeOccurence = false;
 			}
 		}
@@ -73,41 +73,36 @@ public class GestionCartes  {
 		
 	}
 	
-	public static List<Carte> rassembler(List<Carte> list) {
-		List<Carte> listeOrdonnee = new ArrayList<>();
+	public static <E> List<E> rassembler(List<E> list) {
+		List<E> listeOrdonnee = new ArrayList<>();
 		
-		for (ListIterator<Carte> iterator = list.listIterator(); iterator.hasNext();) {
-			//On recupère la carte et on l'ajoute
-			Carte carte = (Carte) iterator.next();
-			listeOrdonnee.add(carte);
-			iterator.remove();
+		for (ListIterator<E> iterator = list.listIterator(); iterator.hasNext();) {
+			//On recupère la carte
+			E element = iterator.next();
 			
-			//On récupère les autres objets
-			int i = list.indexOf(carte);
-			while (i!=-1) {
-				listeOrdonnee.add(carte);
-				list.remove(i);
-				i = list.indexOf(carte);
+			//Si la carte n'est pas déjà présente on ajoute le nombre qu'il faut
+			if (!listeOrdonnee.contains(element)) {
+				for (int i = 0; i < Collections.frequency(list,element); i++) {
+					listeOrdonnee.add(element);
+				}
 			}
-			
 		}
 		return listeOrdonnee;
 	}
 	
-	public static boolean verifierRassemblement(List<Carte> list) {
+	public static <E> boolean verifierRassemblement(List<E> list) {
 		boolean rassemble = true;
 		
-		Carte carte = list.get(0);
-		Carte previousCarte;
-		for (ListIterator<Carte> iterator = list.listIterator(1); iterator.hasNext() && rassemble;) {
-			previousCarte = carte;
-			carte = iterator.next();
+		E element = list.get(0);
+		E previousElt;
+		for (ListIterator<E> iterator = list.listIterator(1); iterator.hasNext() && rassemble;) {
+			previousElt = element;
+			element = iterator.next();
 			
-			if (!carte.equals(previousCarte)) {
-				
-				for (ListIterator<Carte> iterator2 = list.listIterator(iterator.nextIndex()); iterator2.hasNext() && rassemble;) {
-					carte = iterator2.next();
-					if (carte.equals(previousCarte)) {
+			if ((!element.equals(previousElt))&& iterator.hasNext()) {
+				for (ListIterator<E> iterator2 = list.listIterator(iterator.nextIndex()); iterator2.hasNext() && rassemble;) {
+					E doublon = iterator2.next();
+					if (doublon.equals(previousElt)) {
 						rassemble = false;
 					}
 				}
