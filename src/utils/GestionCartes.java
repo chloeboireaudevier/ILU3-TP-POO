@@ -93,4 +93,26 @@ public class GestionCartes  {
 		}
 		return listeOrdonnee;
 	}
+	
+	public static boolean verifierRassemblement(List<Carte> list) {
+		boolean rassemble = true;
+		
+		Carte carte = list.get(0);
+		Carte previousCarte;
+		for (ListIterator<Carte> iterator = list.listIterator(1); iterator.hasNext() && rassemble;) {
+			previousCarte = carte;
+			carte = iterator.next();
+			
+			if (!carte.equals(previousCarte)) {
+				
+				for (ListIterator<Carte> iterator2 = list.listIterator(iterator.nextIndex()); iterator2.hasNext() && rassemble;) {
+					carte = iterator2.next();
+					if (carte.equals(previousCarte)) {
+						rassemble = false;
+					}
+				}
+			}					
+		}
+		return rassemble;
+	}
 }
