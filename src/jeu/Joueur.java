@@ -33,6 +33,8 @@ public class Joueur {
 		main.prendre(carte);
 	}
 	
-	
+	public int donnerKmParcourus() {
+		return zoneDeJeu.donnerKmParcourus();
+	}
 	
 }
