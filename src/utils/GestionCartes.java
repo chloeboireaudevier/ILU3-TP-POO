@@ -87,23 +87,28 @@ public class GestionCartes  {
 	
 	public static <E> boolean verifierRassemblement(List<E> list) {
 		boolean rassemble = true;
-		if (list.size() > 0) {
+		if (!list.isEmpty()) {
 			E element = list.get(0);
 			E previousElt;
 			for (ListIterator<E> iterator = list.listIterator(1); iterator.hasNext() && rassemble;) {
 				previousElt = element;
 				element = iterator.next();
-				
 				if ((!element.equals(previousElt))&& iterator.hasNext()) {
-					for (ListIterator<E> iterator2 = list.listIterator(iterator.nextIndex()); iterator2.hasNext() && rassemble;) {
-						E doublon = iterator2.next();
-						if (doublon.equals(previousElt)) {
-							rassemble = false;
-						}
-					}
+					rassemble = checkNonPresence(list,previousElt,iterator.nextIndex());
 				}					
 			}
 		}
 		return rassemble;
+	}
+	
+	private static <E> boolean checkNonPresence(List<E> list,E element,int indice) {
+		boolean nonPresence = true;
+		for (ListIterator<E> iterator = list.listIterator(indice); iterator.hasNext() && nonPresence;) {
+			E doublon = iterator.next();
+			if (doublon.equals(element)) {
+				nonPresence = false;
+			}
+		}
+		return nonPresence;
 	}
 }
