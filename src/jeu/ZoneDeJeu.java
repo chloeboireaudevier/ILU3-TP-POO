@@ -7,7 +7,7 @@ import cartes.*;
 
 public class ZoneDeJeu {
 	private List<Carte> limites = new ArrayList<Carte>();
-	private List<Carte> bataille = new ArrayList<Carte>();
+	private List<Carte> batailles = new ArrayList<Carte>();
 	private List<Carte> bornes = new ArrayList<Carte>();
 	
 	
@@ -25,5 +25,15 @@ public class ZoneDeJeu {
 			km+= borne.getKm();
 		}
 		return km;
+	}
+	
+	public void deposer(Carte c) {
+		if(c!=null && c instanceof Borne borne) {
+			bornes.add(borne);
+		}else if (c!=null && c instanceof Limite limite) {
+			limites.add(limite);
+		}else if (c!=null && c instanceof Bataille bataille) {
+			batailles.add(bataille);
+		}
 	}
 }
