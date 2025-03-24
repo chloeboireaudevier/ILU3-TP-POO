@@ -42,4 +42,7 @@ public class Joueur {
 		
 	}
 	
+	public boolean estDepotAutorise(Carte carte) {
+		return zoneDeJeu.estDepotAutorise(carte);
+	}
 }
