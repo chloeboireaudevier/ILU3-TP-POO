@@ -8,29 +8,31 @@ import cartes.DebutLimite;
 import cartes.FinLimite;
 import cartes.Parade;
 import cartes.Type;
+import jeu.Cartes;
 import jeu.ZoneDeJeu;
 
 public class TestZoneDeJeu {
 	public static void main(String[] args) {
 		// TP3 PARTIE 2
-//		ZoneDeJeu zoneDeJeu = new ZoneDeJeu();
-//		System.out.println("Deposer carte 25 km");
-//		zoneDeJeu.deposer(new Borne(25));
-//		System.out.println("Deposer carte 50 km");
-//		zoneDeJeu.deposer(new Borne(50));
-//		System.out.println("Deposer carte 75 km");
-//		zoneDeJeu.deposer(new Borne(75));
-//		System.out.println("Total des bornes : " + zoneDeJeu.donnerKmParcourus());
-//
-//		System.out.println("Limite : " + zoneDeJeu.donnerLimitationVitesse());
-//		zoneDeJeu.deposer(new DebutLimite());
-//		System.out.println("Limite : " + zoneDeJeu.donnerLimitationVitesse());
-//		zoneDeJeu.deposer(new FinLimite());
-//		System.out.println("Limite : " + zoneDeJeu.donnerLimitationVitesse());
+		ZoneDeJeu zoneDeJeu = new ZoneDeJeu();
+		System.out.println("Deposer carte 25 km");
+		zoneDeJeu.deposer(new Borne(25));
+		System.out.println("Deposer carte 50 km");
+		zoneDeJeu.deposer(new Borne(50));
+		System.out.println("Deposer carte 75 km");
+		zoneDeJeu.deposer(new Borne(75));
+		System.out.println("Total des bornes : " + zoneDeJeu.donnerKmParcourus());
+
+		System.out.println("Limite : " + zoneDeJeu.donnerLimitationVitesse());
+		zoneDeJeu.deposer(new DebutLimite());
+		System.out.println("Limite : " + zoneDeJeu.donnerLimitationVitesse());
+		zoneDeJeu.deposer(new FinLimite());
+		System.out.println("Limite : " + zoneDeJeu.donnerLimitationVitesse());
 
 		// TP3 PARTIE 3
 		boolean depotOK = false;
-		ZoneDeJeu zoneDeJeu = new ZoneDeJeu();
+		//ZoneDeJeu zoneDeJeu = new ZoneDeJeu();
+		zoneDeJeu = new ZoneDeJeu();
 		// Feu rouge
 		System.out.println("Deposer carte Feu rouge");
 		depotOK = zoneDeJeu.estDepotAutorise(Cartes.FEU_ROUGE);
@@ -178,6 +180,7 @@ public class TestZoneDeJeu {
 //			peut avancer ? true
 
 //		// TP4 Partie 1
+//		ZoneDeJeu zoneDeJeu = new ZoneDeJeu();
 //		boolean depotOK = false;
 //		// Feu rouge
 //		System.out.println("Deposer carte Feu rouge");
