@@ -74,6 +74,7 @@ public class ZoneDeJeu {
 			return false;
 		}
 		if (carte instanceof Attaque attaque) {
+			System.out.println(bottes);
 			return bottes.contains(new Botte(attaque.getType()));
 		}
 		return false;
@@ -141,14 +142,14 @@ public class ZoneDeJeu {
 
 	//TODO TP5
 	public boolean estDepotAutorise(Carte carte) {
-		if (carte != null && carte instanceof Bataille bataille) {
+		if (carte != null && carte instanceof Botte botte) {
+			return bottes.add(botte);
+		}else if (carte != null && carte instanceof Bataille bataille) {
 			return estDepotBatailleAutorise(bataille);
 		} else if (carte != null && carte instanceof Borne borne) {
 			return estDepotBorneAutorise(borne);
 		} else if (carte != null && carte instanceof Limite limite) {
 			return estDepotLimiteAutorise(limite);
-		} else if (carte != null && carte instanceof Botte botte) {
-			return bottes.add(botte);
 		}
 		return false;
 	}
@@ -168,6 +169,6 @@ public class ZoneDeJeu {
 	}
 
 	public boolean estPrioritaire() {
-		return bottes.contains(new Botte(Type.FEU));
+		return bottes.contains(Cartes.PRIORITAIRE);
 	}
 }
