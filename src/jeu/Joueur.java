@@ -1,7 +1,10 @@
 package jeu;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 import cartes.*;
@@ -73,5 +76,28 @@ public class Joueur {
 			coupsDefausse.add(coup);
 		}
 		return coupsDefausse;
+	}
+	
+	public Coup choisirCoup(Set<Joueur> participants) {
+		Set<Coup> coupsValides = coupsPossibles(participants);
+		if (!coupsValides.isEmpty()) {
+			return choixCoupAleatoire(coupsValides);
+		}
+		Set<Coup> coupsDefausse = coupsDefausse();
+		return choixCoupAleatoire(coupsDefausse);
+	}
+	
+	private Coup choixCoupAleatoire(Set<Coup> coups) {
+		List<Coup> listCoups = new ArrayList<>();
+		listCoups.addAll(coups);
+		Random random = new Random();
+		int randomNum = random.nextInt(listCoups.size());
+		Coup coup = listCoups.get(randomNum);
+		listCoups.remove(randomNum);
+		return coup;
+	}
+	
+	public void retirerDeLaMain(Carte carte) {
+		main.jouer(carte);
 	}
 }
