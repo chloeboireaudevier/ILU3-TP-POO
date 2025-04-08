@@ -11,4 +11,5 @@ public class Botte extends Probleme {
 	public String toString() {
 		return super.getType().getBotte();
 	}
+	
 }
