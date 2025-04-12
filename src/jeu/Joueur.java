@@ -14,14 +14,14 @@ public class Joueur {
 	private ZoneDeJeu zoneDeJeu;
 	private MainJoueur main = new MainJoueur();
 	
-	private Joueur(String nom) {
+	private Joueur(String nom) { //TODO
 		this.nom = nom;
 		this.zoneDeJeu = new ZoneDeJeu();
 	}
 
 	@Override
 	public String toString() {
-		return "Joueur [nom=" + nom + "]";
+		return "Joueur [nom=" + nom + "]"; //TODO
 	}
 	
 	@Override

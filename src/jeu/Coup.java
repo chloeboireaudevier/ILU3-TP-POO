@@ -34,4 +34,18 @@ public class Coup {
 		return joueurCourant.estDepotAutorise(carteJouee);
 	}
 	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		if (joueurCible == null) {
+			sb.append("defausse la carte ");
+			sb.append(carteJouee.toString());
+		} else {
+			sb.append("depose la carte ");
+			sb.append(carteJouee.toString());
+			sb.append(" dans la zone de jeu de ");
+			sb.append(joueurCible.toString());
+		}
+		return sb.toString();
+	}
 }
