@@ -28,6 +28,26 @@ public class ZoneDeJeu {
 		}
 		return 50;
 	}
+	
+
+	public Set<Botte> getBottes() {
+		return bottes;
+	}
+
+
+	public List<Limite> getLimites() {
+		return limites;
+	}
+
+
+	public List<Bataille> getBatailles() {
+		return batailles;
+	}
+
+
+	public Collection<Borne> getBornes() {
+		return bornes;
+	}
 
 	public int donnerKmParcourus() {
 		int km = 0;

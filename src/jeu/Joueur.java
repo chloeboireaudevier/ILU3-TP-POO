@@ -100,4 +100,27 @@ public class Joueur {
 	public void retirerDeLaMain(Carte carte) {
 		main.jouer(carte);
 	}
+	
+	public String afficherEtatJoueur() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Bottes :");
+		Set<Botte> bottes = zoneDeJeu.getBottes();
+		for(Botte botte : bottes) {
+			sb.append(botte.toString());
+			sb.append(", ");
+		}
+		sb.append('\n');
+		
+		sb.append("Limite ? : ");
+		sb.append(zoneDeJeu.getLimites().get(0).equals(new DebutLimite()));
+		sb.append('\n');
+		
+		sb.append("Sommet de la pile de bataille ? : ");
+		sb.append(zoneDeJeu.getBatailles().get(0).toString());
+		sb.append('\n');
+		
+		sb.append(main.toString());
+		
+		return sb.toString();
+	}
 }
