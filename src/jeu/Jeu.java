@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Set;
+import java.util.TreeSet;
 
 import cartes.*;
 import utils.*;
@@ -13,8 +14,8 @@ import utils.*;
 public class Jeu {
 	public static final int NBCARTES = 6;
 	private Sabot sabot;
-	private List<Joueur> joueurs = new ArrayList<>(); //TODO list ou set ?
-	private ListIterator<Joueur> iterator = joueurs.listIterator();
+	private Set<Joueur> joueurs = new HashSet<>();
+	private Iterator<Joueur> iterator = joueurs.iterator();
 
 	public Jeu() {
 		JeuDeCartes jeuDeCartes = new JeuDeCartes();
@@ -88,14 +89,14 @@ public class Jeu {
 	
 	public Joueur donnerJoueurSuivant() {
 		if (!iterator.hasNext()) {
-			iterator = joueurs.listIterator();
+			iterator = joueurs.iterator();
 		}
 		return iterator.next();
 	}
 	
 	public String lancer() {
 		Boolean estGagne = false;
-		while( !sabot.estVide() && !estGagne) {
+		while( !sabot.estVide() && Boolean.TRUE.equals(!estGagne)) {
 			Joueur joueur = donnerJoueurSuivant();
 			jouerTour(joueur);
 			for(Joueur j :joueurs) {

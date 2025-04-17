@@ -27,9 +27,11 @@ public class TestJeu {
 			System.out.println(j.getMain());
 		}
 		
-		System.out.println(jeu.jouerTour(j1));
-		System.out.println(jeu.jouerTour(j2));
-		System.out.println(jeu.jouerTour(j3));
+//		System.out.println(jeu.jouerTour(j1));
+//		System.out.println(jeu.jouerTour(j2));
+//		System.out.println(jeu.jouerTour(j3));
+		
+		System.out.println(jeu.lancer());
 	}
 	
 	
