@@ -1,11 +1,13 @@
 package jeu;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.NavigableSet;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -106,6 +108,19 @@ public class Jeu {
 			}
 		}
 		return "Partie terminée : sabot vide";
+	}
+	
+	public List<Joueur> classement(){
+		NavigableSet<Joueur> joueursClasses = new TreeSet<>(
+				new Comparator<Joueur>() {
+					@Override
+					public int compare(Joueur joueur1, Joueur joueur2) {
+						return joueur1.donnerKmParcourus() - joueur2.donnerKmParcourus();
+					}
+				}
+			);
+		joueursClasses.addAll(joueurs);
+		return new ArrayList<>(joueursClasses);	
 	}
 	
 }
