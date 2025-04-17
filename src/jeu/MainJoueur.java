@@ -16,9 +16,8 @@ public class MainJoueur implements Iterable<Carte>{
 	}
 	
 	public void jouer(Carte carte) {
-		if (carte!= null) {
-			assert(main.contains(carte));
-			main.remove(carte);
+		if (carte!= null &&  (main.contains(carte))) {
+				main.remove(carte);
 		}
 	}
 

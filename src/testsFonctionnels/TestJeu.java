@@ -5,8 +5,6 @@ import jeu.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import cartes.*;
-
 public class TestJeu {
 	
 	public static void main(String[] args) {

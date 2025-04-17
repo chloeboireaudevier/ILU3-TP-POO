@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Set;
@@ -14,7 +15,7 @@ import utils.*;
 public class Jeu {
 	public static final int NBCARTES = 6;
 	private Sabot sabot;
-	private Set<Joueur> joueurs = new HashSet<>();
+	private Set<Joueur> joueurs = new LinkedHashSet<>();
 	private Iterator<Joueur> iterator = joueurs.iterator();
 
 	public Jeu() {
@@ -95,17 +96,16 @@ public class Jeu {
 	}
 	
 	public String lancer() {
-		Boolean estGagne = false;
-		while( !sabot.estVide() && Boolean.TRUE.equals(!estGagne)) {
+		while( !sabot.estVide()) {
 			Joueur joueur = donnerJoueurSuivant();
 			jouerTour(joueur);
 			for(Joueur j :joueurs) {
 				if (j.donnerKmParcourus()>=1000) {
-					estGagne = true;
+					return "Partie terminée : joueur gagnant";
 				}
 			}
 		}
-		return "Partie terminée";
+		return "Partie terminée : sabot vide";
 	}
 	
 }
