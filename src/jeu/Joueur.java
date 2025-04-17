@@ -14,7 +14,7 @@ public class Joueur {
 	private ZoneDeJeu zoneDeJeu;
 	private MainJoueur main = new MainJoueur();
 	
-	private Joueur(String nom) { //TODO
+	public Joueur(String nom) { //TODO
 		this.nom = nom;
 		this.zoneDeJeu = new ZoneDeJeu();
 	}
