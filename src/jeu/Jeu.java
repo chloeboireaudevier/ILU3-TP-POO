@@ -60,7 +60,6 @@ public class Jeu {
 		sb.append(joueur.getMain());
 		
 		Set<Joueur> participants = new HashSet<>(joueurs);
-		participants.remove(joueur);
 		Coup coup = joueur.choisirCoup(participants);
 		
 		carte = coup.getCarteJouee();
@@ -77,16 +76,16 @@ public class Jeu {
 		if (joueurCible == null) {
 			sabot.ajouterCarte(carte);
 			sb.append("la pile de defausse\n");
-		} else {
-			joueurCible.donner(carte);
-			if (joueurCible != joueur) {
-				sb.append("la zone de jeu de ");
-				sb.append(joueurCible.toString());
-				sb.append("\n");
-			}else {
-				sb.append("dans sa zone de jeu");
-			}
+		} else if (joueurCible == joueur){
+			joueur.deposer(carte);
+			sb.append("dans sa zone de jeu");
+		}else {
+			joueurCible.deposer(carte);
+			sb.append("la zone de jeu de ");
+			sb.append(joueurCible.toString());
+			sb.append("\n");
 		}
+		System.out.println(sb.toString()+"-------\n");
 		return sb.toString();
 	}
 	
@@ -98,16 +97,26 @@ public class Jeu {
 	}
 	
 	public String lancer() {
-		while( !sabot.estVide()) {
+		StringBuilder stringBuilder = new StringBuilder();
+		while(!sabot.estVide()) {
 			Joueur joueur = donnerJoueurSuivant();
 			jouerTour(joueur);
+			System.out.println("Etat "+joueur.afficherEtatJoueur()+"\n");
 			for(Joueur j :joueurs) {
 				if (j.donnerKmParcourus()>=1000) {
-					return "Partie terminée : joueur gagnant";
+					stringBuilder.append(j.toString());
+					stringBuilder.append(" gagne la partie\n");
+					return stringBuilder.toString();
 				}
 			}
 		}
-		return "Partie terminée : sabot vide";
+		
+		stringBuilder.append("Partie terminée : sabot vide\n");
+		
+		//List<Joueur> classement = classement();
+		
+		//stringBuilder.append(classement.toString());
+		return stringBuilder.toString();
 	}
 	
 	public List<Joueur> classement(){
@@ -115,11 +124,17 @@ public class Jeu {
 				new Comparator<Joueur>() {
 					@Override
 					public int compare(Joueur joueur1, Joueur joueur2) {
-						return joueur1.donnerKmParcourus() - joueur2.donnerKmParcourus();
+						int compare =  joueur1.donnerKmParcourus() - joueur2.donnerKmParcourus();
+						if (compare == 0) {
+							compare = joueur1.hashCode() - joueur2.hashCode();
+						}
+						return compare;
 					}
 				}
 			);
-		joueursClasses.addAll(joueurs);
+		for (Joueur j : joueurs) {
+			joueursClasses.add(j);
+		}
 		return new ArrayList<>(joueursClasses);	
 	}
 	

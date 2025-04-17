@@ -21,7 +21,7 @@ public abstract class Probleme extends Carte {
 	
 	@Override
 	public int hashCode() {
-		return 17*(type.hashCode());
+		return super.hashCode()+17*(type.hashCode());
 	}
 	
 

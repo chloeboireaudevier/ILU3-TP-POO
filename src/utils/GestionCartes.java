@@ -9,9 +9,9 @@ import java.util.ListIterator;
 import java.util.Random;
 
 public class GestionCartes  {
+	private static Random rand = new Random();
 	
 	public static <E> E extraire(List<E> list) {
-		Random rand = new Random();
 		int randomNum = rand.nextInt(list.size());
 		
 		E element = list.get(randomNum);

@@ -11,12 +11,11 @@ import cartes.*;
 
 public class Joueur {
 	private String nom;
-	private ZoneDeJeu zoneDeJeu;
+	private ZoneDeJeu zoneDeJeu = new ZoneDeJeu();;
 	private MainJoueur main = new MainJoueur();
 	
 	public Joueur(String nom) { //TODO
 		this.nom = nom;
-		this.zoneDeJeu = new ZoneDeJeu();
 	}
 
 	@Override
@@ -30,6 +29,11 @@ public class Joueur {
 			return this.nom.equals(joueur.nom);
 		}
 		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		return nom.hashCode();
 	}
 
 	public MainJoueur getMain() {
@@ -112,15 +116,24 @@ public class Joueur {
 		sb.append('\n');
 		
 		sb.append("Limite ? : ");
-		sb.append(zoneDeJeu.getLimites().get(0).equals(new DebutLimite()));
+		if (zoneDeJeu.getLimites().isEmpty()) {
+			sb.append("vide");
+		} else {
+			sb.append(zoneDeJeu.getLimites().get(0).equals(new DebutLimite()));
+		}
 		sb.append('\n');
 		
 		sb.append("Sommet de la pile de bataille ? : ");
-		sb.append(zoneDeJeu.getBatailles().get(0).toString());
+		if (zoneDeJeu.getBatailles().isEmpty()) {
+			sb.append("vide");
+		} else {
+			sb.append(zoneDeJeu.getBatailles().get(0).toString());
+		}
 		sb.append('\n');
 		
-		sb.append(main.toString());
+		//sb.append("Km parcourus : "+donnerKmParcourus());
 		
+		sb.append(main.toString());
 		return sb.toString();
 	}
 }
